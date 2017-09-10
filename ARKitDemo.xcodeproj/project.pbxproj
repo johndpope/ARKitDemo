@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */; };
+		FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */; };
 		FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0201F6390D70052B12A /* AppDelegate.swift */; };
 		FDF0C0231F6390D70052B12A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0221F6390D70052B12A /* art.scnassets */; };
 		FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0241F6390D70052B12A /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCollectionViewExtensions.swift; sourceTree = "<group>"; };
 		FDF0C01D1F6390D70052B12A /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF0C0201F6390D70052B12A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDF0C0221F6390D70052B12A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -57,14 +61,32 @@
 			isa = PBXGroup;
 			children = (
 				FDF0C0201F6390D70052B12A /* AppDelegate.swift */,
-				FDF0C0221F6390D70052B12A /* art.scnassets */,
-				FDF0C0241F6390D70052B12A /* ViewController.swift */,
-				FDF0C0261F6390D70052B12A /* Main.storyboard */,
-				FDF0C0291F6390D70052B12A /* Assets.xcassets */,
-				FDF0C02B1F6390D70052B12A /* LaunchScreen.storyboard */,
-				FDF0C02E1F6390D70052B12A /* Info.plist */,
+				FDF0C0341F6390E90052B12A /* Views & Controllers */,
+				FDF0C0361F6396E10052B12A /* Supporting Files */,
 			);
 			path = ARKitDemo;
+			sourceTree = "<group>";
+		};
+		FDF0C0341F6390E90052B12A /* Views & Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0C0261F6390D70052B12A /* Main.storyboard */,
+				FDF0C0241F6390D70052B12A /* ViewController.swift */,
+				FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */,
+				FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */,
+			);
+			path = "Views & Controllers";
+			sourceTree = "<group>";
+		};
+		FDF0C0361F6396E10052B12A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0C02E1F6390D70052B12A /* Info.plist */,
+				FDF0C02B1F6390D70052B12A /* LaunchScreen.storyboard */,
+				FDF0C0291F6390D70052B12A /* Assets.xcassets */,
+				FDF0C0221F6390D70052B12A /* art.scnassets */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +162,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */,
+				FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */,
 				FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */,
 				FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */,
 			);

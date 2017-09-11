@@ -74,3 +74,52 @@ class VirtualObject: SCNNode {
     }
 
 }
+
+extension VirtualObject {
+
+    static func castNodeToVirtualObject(node: SCNNode) -> VirtualObject? {
+        if let virtualObjectRoot = node as? VirtualObject {
+            return virtualObjectRoot
+        }
+
+        if node.parent != nil {
+            return castNodeToVirtualObject(node: node.parent!)
+        }
+
+        return nil
+    }
+
+}
+
+// MARK: - Scale
+
+protocol Scaleable {
+    func reactToScale()
+}
+
+extension SCNNode {
+    func reactsToScale() -> Scaleable? {
+        if let canReact = self as? Scaleable {
+            return canReact
+        }
+
+        if let parent = self.parent {
+            return parent.reactsToScale()
+        }
+
+        return nil
+    }
+}
+
+extension VirtualObject: Scaleable {
+    func reactToScale() {
+        for (nodeName, particleSize) in definition.particleScaleInfo {
+            guard let node = self.childNode(withName: nodeName, recursively: true),
+                let particleSystem = node.particleSystems?.first else {
+                    continue
+            }
+            particleSystem.reset()
+            particleSystem.particleSize = CGFloat(scale.x * particleSize)
+        }
+    }
+}

@@ -12,18 +12,23 @@ import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
+    // MARK: - Properties
+
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
-
+    @IBOutlet weak var messageLabel: UILabel!
+    
     @IBOutlet var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var collectionViewBottomCloseButtonConstraint: NSLayoutConstraint!
     @IBOutlet var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var collectionViewBottomMessageLabelConstraint: NSLayoutConstraint!
     @IBOutlet var closeButtonBottomConstraint: NSLayoutConstraint!
+
+    var messageManager: MessageManager!
 
     // MARK: - View life cycle
 
@@ -31,12 +36,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewDidLoad()
         
         sceneView.delegate = self
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
 
-        print(collectionViewTopConstraint)
-        print(collectionViewBottomCloseButtonConstraint)
-        print(collectionViewHeightConstraint)
-        print(collectionViewBottomMessageLabelConstraint)
-
+        messageManager = MessageManager(messageLabel: messageLabel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +47,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         hideCollectionViewAndCloseButton(animated: false)
         
         let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
     }
     
@@ -109,16 +112,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     // MARK: - ARSCNViewDelegate
-    
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
+
+    // MARK: - ARSessionObserver
+
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        messageManager.showTrackingQualityInfo(for: camera.trackingState)
     }
-*/
-    
+
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         

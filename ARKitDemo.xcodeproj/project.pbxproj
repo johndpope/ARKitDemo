@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */; };
 		FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */; };
+		FDF0BEC51F65464400D09912 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEC41F65464400D09912 /* MessageManager.swift */; };
+		FDF0BEC71F654FA200D09912 /* VirtualObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEC61F654FA200D09912 /* VirtualObjectManager.swift */; };
+		FDF0BEC91F6551D400D09912 /* VirtualObjectsInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = FDF0BEC81F65519F00D09912 /* VirtualObjectsInfo.json */; };
+		FDF0BECC1F65525B00D09912 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BECB1F65525B00D09912 /* VirtualObject.swift */; };
+		FDF0BECF1F65903C00D09912 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BECE1F65903C00D09912 /* Extensions.swift */; };
+		FDF0BEEF1F66141E00D09912 /* ARSCNViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */; };
 		FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0201F6390D70052B12A /* AppDelegate.swift */; };
 		FDF0C0231F6390D70052B12A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0221F6390D70052B12A /* art.scnassets */; };
 		FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0241F6390D70052B12A /* ViewController.swift */; };
@@ -20,6 +26,12 @@
 /* Begin PBXFileReference section */
 		FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCollectionViewExtensions.swift; sourceTree = "<group>"; };
+		FDF0BEC41F65464400D09912 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		FDF0BEC61F654FA200D09912 /* VirtualObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectManager.swift; sourceTree = "<group>"; };
+		FDF0BEC81F65519F00D09912 /* VirtualObjectsInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VirtualObjectsInfo.json; sourceTree = "<group>"; };
+		FDF0BECB1F65525B00D09912 /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
+		FDF0BECE1F65903C00D09912 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewExtensions.swift; sourceTree = "<group>"; };
 		FDF0C01D1F6390D70052B12A /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF0C0201F6390D70052B12A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDF0C0221F6390D70052B12A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -41,6 +53,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FDF0BEC31F65462900D09912 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0BEC41F65464400D09912 /* MessageManager.swift */,
+				FDF0BEC61F654FA200D09912 /* VirtualObjectManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FDF0BECA1F65524000D09912 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0BECB1F65525B00D09912 /* VirtualObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FDF0BECD1F655D7D00D09912 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FDF0BECE1F65903C00D09912 /* Extensions.swift */,
+				FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		FDF0C0141F6390D70052B12A = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +98,9 @@
 		FDF0C01F1F6390D70052B12A /* ARKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FDF0BECD1F655D7D00D09912 /* Extensions */,
+				FDF0BECA1F65524000D09912 /* Models */,
+				FDF0BEC31F65462900D09912 /* Managers */,
 				FDF0C0201F6390D70052B12A /* AppDelegate.swift */,
 				FDF0C0341F6390E90052B12A /* Views & Controllers */,
 				FDF0C0361F6396E10052B12A /* Supporting Files */,
@@ -81,6 +122,7 @@
 		FDF0C0361F6396E10052B12A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FDF0BEC81F65519F00D09912 /* VirtualObjectsInfo.json */,
 				FDF0C02E1F6390D70052B12A /* Info.plist */,
 				FDF0C02B1F6390D70052B12A /* LaunchScreen.storyboard */,
 				FDF0C0291F6390D70052B12A /* Assets.xcassets */,
@@ -148,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDF0BEC91F6551D400D09912 /* VirtualObjectsInfo.json in Resources */,
 				FDF0C0231F6390D70052B12A /* art.scnassets in Resources */,
 				FDF0C02D1F6390D70052B12A /* LaunchScreen.storyboard in Resources */,
 				FDF0C02A1F6390D70052B12A /* Assets.xcassets in Resources */,
@@ -164,8 +207,13 @@
 			files = (
 				FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */,
 				FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */,
+				FDF0BEC71F654FA200D09912 /* VirtualObjectManager.swift in Sources */,
+				FDF0BECF1F65903C00D09912 /* Extensions.swift in Sources */,
+				FDF0BEC51F65464400D09912 /* MessageManager.swift in Sources */,
 				FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */,
+				FDF0BECC1F65525B00D09912 /* VirtualObject.swift in Sources */,
 				FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */,
+				FDF0BEEF1F66141E00D09912 /* ARSCNViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

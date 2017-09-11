@@ -23,9 +23,14 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </arscnView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracking status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnq-PD-U9A">
-                                <rect key="frame" x="0.0" y="40" width="375" height="21"/>
+                                <rect key="frame" x="87.5" y="40" width="200" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="EmW-ad-uhq"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="iLl-ou-q06"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unF-zb-QfB">
@@ -80,7 +85,7 @@
                                 <state key="normal" title="SETTINGS"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kfL-Aa-Wub">
-                                <rect key="frame" x="20" y="81" width="335" height="506"/>
+                                <rect key="frame" x="20" y="90" width="335" height="497"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="506" id="1ui-cv-tYp"/>
@@ -137,6 +142,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rnq-PD-U9A" firstAttribute="centerX" secondItem="Af3-hD-tem" secondAttribute="centerX" id="42H-y8-2VM"/>
                             <constraint firstItem="Lig-bd-bA0" firstAttribute="leading" secondItem="Af3-hD-tem" secondAttribute="leading" id="7iq-8W-9gi"/>
                             <constraint firstItem="Af3-hD-tem" firstAttribute="trailing" secondItem="0Te-1F-Zm1" secondAttribute="trailing" constant="20" id="9Tm-Xc-oz9"/>
                             <constraint firstItem="Lig-bd-bA0" firstAttribute="top" secondItem="Af3-hD-tem" secondAttribute="top" id="FU6-di-1ng"/>
@@ -146,12 +152,10 @@
                             <constraint firstItem="Af3-hD-tem" firstAttribute="trailing" secondItem="kfL-Aa-Wub" secondAttribute="trailing" constant="20" id="MMV-fC-hag"/>
                             <constraint firstItem="unF-zb-QfB" firstAttribute="centerX" secondItem="Af3-hD-tem" secondAttribute="centerX" id="MgV-LB-gZs"/>
                             <constraint firstItem="Af3-hD-tem" firstAttribute="bottom" secondItem="0Te-1F-Zm1" secondAttribute="bottom" constant="20" id="OQP-gK-djX"/>
-                            <constraint firstItem="Af3-hD-tem" firstAttribute="trailing" secondItem="rnq-PD-U9A" secondAttribute="trailing" id="OXB-TD-Kpz"/>
                             <constraint firstItem="Af3-hD-tem" firstAttribute="bottom" secondItem="WPG-8w-VKg" secondAttribute="bottom" constant="20" id="QHi-Th-KoM"/>
                             <constraint firstItem="9hY-Qg-Dnx" firstAttribute="leading" secondItem="Af3-hD-tem" secondAttribute="centerX" constant="50" id="Xdc-Dn-AJA"/>
                             <constraint firstItem="Af3-hD-tem" firstAttribute="bottom" secondItem="Lig-bd-bA0" secondAttribute="bottom" id="Yqc-51-UqO"/>
                             <constraint firstItem="rnq-PD-U9A" firstAttribute="top" secondItem="Af3-hD-tem" secondAttribute="top" constant="20" id="Z4x-g4-J20"/>
-                            <constraint firstItem="rnq-PD-U9A" firstAttribute="leading" secondItem="Af3-hD-tem" secondAttribute="leading" id="egz-5V-WzD"/>
                             <constraint firstItem="kfL-Aa-Wub" firstAttribute="top" secondItem="rnq-PD-U9A" secondAttribute="bottom" constant="20" id="ffq-Tk-Rvu"/>
                             <constraint firstItem="Af3-hD-tem" firstAttribute="bottom" secondItem="ddu-RF-ucF" secondAttribute="bottom" constant="20" id="htI-gO-DPd"/>
                             <constraint firstItem="ddu-RF-ucF" firstAttribute="top" secondItem="kfL-Aa-Wub" secondAttribute="bottom" constant="20" id="kiX-Kp-BXR"/>
@@ -172,6 +176,7 @@
                         <outlet property="collectionViewHeightConstraint" destination="1ui-cv-tYp" id="BKF-5r-FJy"/>
                         <outlet property="collectionViewTopConstraint" destination="ffq-Tk-Rvu" id="AwO-Qw-Qad"/>
                         <outlet property="confirmButton" destination="9hY-Qg-Dnx" id="thb-cL-i82"/>
+                        <outlet property="messageLabel" destination="rnq-PD-U9A" id="fsU-gp-b2y"/>
                         <outlet property="sceneView" destination="Lig-bd-bA0" id="HmR-uN-53m"/>
                         <outlet property="settingsButton" destination="0Te-1F-Zm1" id="9as-mJ-Qzl"/>
                     </connections>

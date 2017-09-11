@@ -268,4 +268,58 @@ class VirtualObjectManager {
         return (nil, nil, false)
     }
 
+
+    // MARK: - React to gestures
+
+    private var currentGesture: Gesture?
+
+    func reactToTouchesBegan(_ touches: Set<UITouch>, with event: UIEvent?, in sceneView: ARSCNView) {
+        if virtualObjects.isEmpty {
+            return
+        }
+
+        if currentGesture == nil {
+            currentGesture = Gesture.startGesture(from: touches,
+                                                  sceneView: sceneView,
+                                                  lastUsedObject: lastUsedObject, 
+                                                  objectManager: self)
+            if let newObject = currentGesture?.lastUsedObject {
+                lastUsedObject = newObject
+            }
+        } else {
+            currentGesture = currentGesture?.updateGesture(from: touches, .touchBegan)
+            if let newObject = currentGesture?.lastUsedObject {
+                lastUsedObject = newObject
+            }
+        }
+    }
+
+    func reactToTouchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if virtualObjects.isEmpty {
+            return
+        }
+
+        currentGesture = currentGesture?.updateGesture(from: touches, .touchMoved)
+        if let newObject = currentGesture?.lastUsedObject {
+            lastUsedObject = newObject
+        }
+    }
+
+    func reactToTouchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if virtualObjects.isEmpty {
+            return
+        }
+        currentGesture = currentGesture?.updateGesture(from: touches, .touchEnded)
+        if let newObject = currentGesture?.lastUsedObject {
+            lastUsedObject = newObject
+        }
+    }
+
+    func reactToTouchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if virtualObjects.isEmpty {
+            return
+        }
+        currentGesture = currentGesture?.updateGesture(from: touches, .touchCancelled)
+    }
+
 }

@@ -108,6 +108,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         confirmButton.isHidden = true
     }
 
+    func addVirtualOjbect(at index: Int) {
+        guard let cameraTransform = sceneView.session.currentFrame?.camera.transform else {
+            return
+        }
+
+        let definition = VirtualObjectManager.availableObjectDefinitions[index]
+        let object = VirtualObject(definition: definition)
+
+        let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
+        let (worldPosition, _, _) = virtualObjectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
+        let position = worldPosition ?? float3(0)
+
+        virtualObjectManager.loadVirtualObject(object, to: position, cameraTransform: cameraTransform)
+
+        if object.parent == nil {
+            DispatchQueue.global().async {
+                self.sceneView.scene.rootNode.addChildNode(object)
+            }
+        }
+    }
+
     // MARK: - Actions
 
     @IBAction func addButtonTapped() {
@@ -156,4 +177,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+
+    // MARK: - Gesture Recognizers
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        virtualObjectManager.reactToTouchesBegan(touches, with: event, in: self.sceneView)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        virtualObjectManager.reactToTouchesMoved(touches, with: event)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        virtualObjectManager.reactToTouchesEnded(touches, with: event)
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        virtualObjectManager.reactToTouchesCancelled(touches, with: event)
+    }
+
 }

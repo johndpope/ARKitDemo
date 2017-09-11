@@ -53,6 +53,9 @@
                                     <constraint firstAttribute="width" constant="40" id="z9s-Uf-NB4"/>
                                 </constraints>
                                 <state key="normal" title="YES"/>
+                                <connections>
+                                    <action selector="confirmButtonTapped" destination="BV1-FR-VrT" eventType="touchUpInside" id="GHb-qa-8KK"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-8w-VKg">
                                 <rect key="frame" x="97.5" y="607" width="40" height="40"/>
@@ -62,6 +65,9 @@
                                     <constraint firstAttribute="width" constant="40" id="yXb-wr-hXi"/>
                                 </constraints>
                                 <state key="normal" title="NO"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped" destination="BV1-FR-VrT" eventType="touchUpInside" id="IRp-vn-knB"/>
+                                </connections>
                             </button>
                             <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddu-RF-ucF">
                                 <rect key="frame" x="87" y="607" width="200" height="40"/>
@@ -97,7 +103,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ObjectCell" id="E8N-vO-s9M" customClass="ObjectCollectionViewCell" customModule="ARKitDemo" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" reuseIdentifier="ObjectCell" id="E8N-vO-s9M" customClass="ObjectCollectionViewCell" customModule="ARKitDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -106,6 +112,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mBr-rq-lCH">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mBr-rq-lCH" secondAttribute="height" multiplier="1:1" id="hRd-bp-qT4"/>
                                                         <constraint firstAttribute="width" constant="100" id="o8s-rq-dcd"/>
@@ -113,6 +120,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="object name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-qQ-l4c">
                                                     <rect key="frame" x="2.5" y="105" width="95" height="25"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="LHT-2N-Jag"/>
                                                     </constraints>
@@ -122,6 +130,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="mBr-rq-lCH" firstAttribute="top" secondItem="E8N-vO-s9M" secondAttribute="top" id="EHK-OI-749"/>
                                             <constraint firstItem="mBr-rq-lCH" firstAttribute="centerX" secondItem="E8N-vO-s9M" secondAttribute="centerX" id="LQw-1u-8aI"/>

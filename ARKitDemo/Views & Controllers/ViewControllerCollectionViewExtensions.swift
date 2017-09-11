@@ -12,7 +12,7 @@ import UIKit
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return VirtualObjectManager.availableObjectDefinitions.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -22,13 +22,17 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         }
 
-        objectCell.objectImageView.image = UIImage(named: "")
-        objectCell.objectLabel.text = "object name"
+        var objectDefinition = VirtualObjectManager.availableObjectDefinitions[indexPath.row]
+
+        objectCell.objectImageView.image = objectDefinition.thumbImage
+        objectCell.objectLabel.text = objectDefinition.displayName
 
         return objectCell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        hideCollectionViewAndCloseButton(animated: true)
+        showCancelAndConfirmButtons()
 
     }
 

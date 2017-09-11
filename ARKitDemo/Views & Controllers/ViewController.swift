@@ -64,7 +64,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     // MARK: - Private Methods
 
-    private func hideCollectionViewAndCloseButton(animated: Bool) {
+    func hideCollectionViewAndCloseButton(animated: Bool) {
         let duration = animated ? 0.25 : 0
         UIView.animate(withDuration: duration, animations: {
             self.collectionViewTopConstraint.isActive = false
@@ -80,7 +80,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         UIView.animate(withDuration: 0.5,
                        delay: 0,
-                       usingSpringWithDamping: 0.8,
+                       usingSpringWithDamping: 0.7,
                        initialSpringVelocity: 0.4,
                        options: [.curveEaseInOut],
                        animations: {
@@ -97,6 +97,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         })
     }
 
+    func showCancelAndConfirmButtons() {
+        cancelButton.isHidden = false
+        confirmButton.isHidden = false
+    }
+    
+    func hideCancelAndConfirmButtons() {
+        cancelButton.isHidden = true
+        confirmButton.isHidden = true
+    }
+
     // MARK: - Actions
 
     @IBAction func addButtonTapped() {
@@ -109,6 +119,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         addButton.isHidden = false
         closeButton.isHidden = true
         hideCollectionViewAndCloseButton(animated: true)
+    }
+
+    @IBAction func cancelButtonTapped() {
+        addButton.isHidden = false
+        hideCancelAndConfirmButtons()
+    }
+
+    @IBAction func confirmButtonTapped() {
+
     }
 
     // MARK: - ARSCNViewDelegate

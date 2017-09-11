@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import ARKit
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -34,6 +35,15 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         hideCollectionViewAndCloseButton(animated: true)
         showCancelAndConfirmButtons()
 
+        let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
+        let (worldPosition, _, _) = virtualObjectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
+
+        let plane = PlacementHelperPlane()
+        if let worldPosition = worldPosition {
+            plane.simdPosition = worldPosition
+        }
+
+        sceneView.scene.rootNode.addChildNode(plane)
     }
 
 }

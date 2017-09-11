@@ -29,6 +29,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var closeButtonBottomConstraint: NSLayoutConstraint!
 
     var messageManager: MessageManager!
+    lazy var virtualObjectManager = VirtualObjectManager()
 
     // MARK: - View life cycle
 
@@ -133,12 +134,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-
-        let plane = Plane(anchor: planeAnchor)
-        node.addChildNode(plane)
     }
 
     // MARK: - ARSessionObserver

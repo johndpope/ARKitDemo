@@ -1,5 +1,5 @@
 //
-//  Plane.swift
+//  PlacementHelperPlane.swift
 //  ARKitDemo
 //
 //  Created by Lebron on 11/09/2017.
@@ -9,16 +9,18 @@
 import SceneKit
 import ARKit
 
-class Plane: SCNNode {
+class PlacementHelperPlane: SCNNode {
 
-    var anchor: ARPlaneAnchor
+//    var anchor: ARPlaneAnchor
     var planeGeometry: SCNBox
 
-    init(anchor: ARPlaneAnchor) {
-        self.anchor = anchor
+    override init() {
+//        self.anchor = anchor
 
-        let width = anchor.extent.x
-        let length = anchor.extent.z
+//        let width = anchor.extent.x
+//        let length = anchor.extent.z
+        let width = 0.5
+        let length = 0.5
         let planeHeight: CGFloat = 0.01
 
         self.planeGeometry = SCNBox(width: CGFloat(width), height: planeHeight, length: CGFloat(length), chamferRadius: 0)
@@ -41,15 +43,19 @@ class Plane: SCNNode {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func update(for anchor: ARPlaneAnchor) {
-        planeGeometry.width = CGFloat(anchor.extent.x)
-        planeGeometry.length = CGFloat(anchor.extent.z)
-
-        position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
-
-        let node = childNodes.first
-        node?.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: planeGeometry, options: nil))
-    }
+//    func update(for anchor: ARPlaneAnchor) {
+//        planeGeometry.width = CGFloat(anchor.extent.x)
+//        planeGeometry.length = CGFloat(anchor.extent.z)
+//
+//        position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
+//
+//        let node = childNodes.first
+//        node?.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: planeGeometry, options: nil))
+//    }
+//
+//    func update(for worldPosition: float3, camera: ARCamera) {
+//        simdPosition = worldPosition
+//    }
 
     func setTextureScale() {
         let width = Float(planeGeometry.width)
@@ -78,25 +84,25 @@ class Plane: SCNNode {
 
         return material
 
-//        var materialName = ""
-//
-//        switch index {
-//        case 0:
-//            materialName = "tron"
-//        case 1:
-//            materialName = "oakfloor2"
-//        case 2:
-//            materialName = "sculptedfloorboards"
-//        case 3:
-//            materialName = "granitesmooth"
-//        case 4:
-//            // planes will be transparent
-//            return nil
-//        default:
-//            return nil
-//        }
-//
-//        return MaterialManager.material(named: materialName)
+        //        var materialName = ""
+        //
+        //        switch index {
+        //        case 0:
+        //            materialName = "tron"
+        //        case 1:
+        //            materialName = "oakfloor2"
+        //        case 2:
+        //            materialName = "sculptedfloorboards"
+        //        case 3:
+        //            materialName = "granitesmooth"
+        //        case 4:
+        //            // planes will be transparent
+        //            return nil
+        //        default:
+        //            return nil
+        //        }
+        //
+        //        return MaterialManager.material(named: materialName)
     }
 
     func transparentMaterial() -> SCNMaterial {

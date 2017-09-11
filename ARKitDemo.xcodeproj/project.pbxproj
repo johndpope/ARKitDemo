@@ -15,11 +15,11 @@
 		FDF0BECC1F65525B00D09912 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BECB1F65525B00D09912 /* VirtualObject.swift */; };
 		FDF0BECF1F65903C00D09912 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BECE1F65903C00D09912 /* Extensions.swift */; };
 		FDF0BEEF1F66141E00D09912 /* ARSCNViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */; };
-		FDF0BEF41F6648A400D09912 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEF31F6648A400D09912 /* Plane.swift */; };
 		FDF0BEF71F665DD300D09912 /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEF61F665DD300D09912 /* Gesture.swift */; };
 		FDF0BEF91F665EA700D09912 /* SingleFingerGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEF81F665EA700D09912 /* SingleFingerGesture.swift */; };
 		FDF0BEFB1F665EBA00D09912 /* TwoFingerGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEFA1F665EBA00D09912 /* TwoFingerGesture.swift */; };
 		FDF0BEFD1F66665400D09912 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEFC1F66665400D09912 /* CGPointExtensions.swift */; };
+		FDF0BEFF1F668C2300D09912 /* PlacementHelperPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEFE1F668C2300D09912 /* PlacementHelperPlane.swift */; };
 		FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0201F6390D70052B12A /* AppDelegate.swift */; };
 		FDF0C0231F6390D70052B12A /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0221F6390D70052B12A /* Models.scnassets */; };
 		FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0241F6390D70052B12A /* ViewController.swift */; };
@@ -37,11 +37,11 @@
 		FDF0BECB1F65525B00D09912 /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
 		FDF0BECE1F65903C00D09912 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewExtensions.swift; sourceTree = "<group>"; };
-		FDF0BEF31F6648A400D09912 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		FDF0BEF61F665DD300D09912 /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 		FDF0BEF81F665EA700D09912 /* SingleFingerGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFingerGesture.swift; sourceTree = "<group>"; };
 		FDF0BEFA1F665EBA00D09912 /* TwoFingerGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFingerGesture.swift; sourceTree = "<group>"; };
 		FDF0BEFC1F66665400D09912 /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
+		FDF0BEFE1F668C2300D09912 /* PlacementHelperPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementHelperPlane.swift; sourceTree = "<group>"; };
 		FDF0C01D1F6390D70052B12A /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF0C0201F6390D70052B12A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDF0C0221F6390D70052B12A /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 		FDF0BEF01F663A3B00D09912 /* Placement Helper Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				FDF0BEF31F6648A400D09912 /* Plane.swift */,
+				FDF0BEFE1F668C2300D09912 /* PlacementHelperPlane.swift */,
 			);
 			path = "Placement Helper Shapes";
 			sourceTree = "<group>";
@@ -237,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */,
+				FDF0BEFF1F668C2300D09912 /* PlacementHelperPlane.swift in Sources */,
 				FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */,
 				FDF0BEFB1F665EBA00D09912 /* TwoFingerGesture.swift in Sources */,
 				FDF0BEC71F654FA200D09912 /* VirtualObjectManager.swift in Sources */,
@@ -249,7 +250,6 @@
 				FDF0BEFD1F66665400D09912 /* CGPointExtensions.swift in Sources */,
 				FDF0BEEF1F66141E00D09912 /* ARSCNViewExtensions.swift in Sources */,
 				FDF0BEF71F665DD300D09912 /* Gesture.swift in Sources */,
-				FDF0BEF41F6648A400D09912 /* Plane.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

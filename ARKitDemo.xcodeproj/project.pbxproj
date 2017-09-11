@@ -16,7 +16,7 @@
 		FDF0BECF1F65903C00D09912 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BECE1F65903C00D09912 /* Extensions.swift */; };
 		FDF0BEEF1F66141E00D09912 /* ARSCNViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */; };
 		FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0201F6390D70052B12A /* AppDelegate.swift */; };
-		FDF0C0231F6390D70052B12A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0221F6390D70052B12A /* art.scnassets */; };
+		FDF0C0231F6390D70052B12A /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0221F6390D70052B12A /* Models.scnassets */; };
 		FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0241F6390D70052B12A /* ViewController.swift */; };
 		FDF0C0281F6390D70052B12A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0261F6390D70052B12A /* Main.storyboard */; };
 		FDF0C02A1F6390D70052B12A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0291F6390D70052B12A /* Assets.xcassets */; };
@@ -34,7 +34,7 @@
 		FDF0BEEE1F66141E00D09912 /* ARSCNViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSCNViewExtensions.swift; sourceTree = "<group>"; };
 		FDF0C01D1F6390D70052B12A /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDF0C0201F6390D70052B12A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FDF0C0221F6390D70052B12A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		FDF0C0221F6390D70052B12A /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		FDF0C0241F6390D70052B12A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FDF0C0271F6390D70052B12A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDF0C0291F6390D70052B12A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				FDF0C02E1F6390D70052B12A /* Info.plist */,
 				FDF0C02B1F6390D70052B12A /* LaunchScreen.storyboard */,
 				FDF0C0291F6390D70052B12A /* Assets.xcassets */,
-				FDF0C0221F6390D70052B12A /* art.scnassets */,
+				FDF0C0221F6390D70052B12A /* Models.scnassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -191,7 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDF0BEC91F6551D400D09912 /* VirtualObjectsInfo.json in Resources */,
-				FDF0C0231F6390D70052B12A /* art.scnassets in Resources */,
+				FDF0C0231F6390D70052B12A /* Models.scnassets in Resources */,
 				FDF0C02D1F6390D70052B12A /* LaunchScreen.storyboard in Resources */,
 				FDF0C02A1F6390D70052B12A /* Assets.xcassets in Resources */,
 				FDF0C0281F6390D70052B12A /* Main.storyboard in Resources */,

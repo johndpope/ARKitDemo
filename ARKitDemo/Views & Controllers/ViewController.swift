@@ -27,10 +27,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var collectionViewBottomMessageLabelConstraint: NSLayoutConstraint!
     @IBOutlet var closeButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsButtonTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet var cancelAndConfirmButtonBottomConstraints: [NSLayoutConstraint]!
 
     var messageManager: MessageManager!
 
     var currentHelperPlane: PlacementHelperPlane?
+    var selectedObjectIndex: Int = 0
 
     lazy var virtualObjectManager = VirtualObjectManager()
     lazy var placementHelperPlaneManager = PlacementHelperPlaneManager()
@@ -53,6 +57,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
 
         hideCollectionViewAndCloseButton(animated: false)
+        animateAddButton(hide: true, animated: false)
+        animateCancelAndConfirmButtons(hide: true, animated: false)
+        animateSettingsButton(hide: true, animated: false)
         
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
@@ -82,6 +89,39 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         })
     }
 
+    func animateAddButton(hide: Bool, animated: Bool) {
+        let duration = animated ? 0.25 : 0
+        let constant: CGFloat = hide ? -60 : 20
+        UIView.animate(withDuration: duration, animations: {
+            self.addButtonBottomConstraint.constant = constant
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    func addButtonIsHidden() -> Bool {
+        return addButtonBottomConstraint.constant == -60
+    }
+
+    func animateSettingsButton(hide: Bool, animated: Bool) {
+        let duration = animated ? 0.25 : 0
+        let constant: CGFloat = hide ? -60 : 20
+        UIView.animate(withDuration: duration, animations: {
+            self.settingsButtonTrailingConstraint.constant = constant
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    func animateCancelAndConfirmButtons(hide: Bool, animated: Bool) {
+        let duration = animated ? 0.25 : 0
+        let constant: CGFloat = hide ? -60 : 20
+        UIView.animate(withDuration: duration, animations: {
+            self.cancelAndConfirmButtonBottomConstraints.forEach({ constraint in
+                constraint.constant = constant
+            })
+            self.view.layoutIfNeeded()
+        })
+    }
+
     private func showCollectionViewAndCloseButton() {
         collectionViewHeightConstraint.isActive = false
         collectionViewBottomMessageLabelConstraint.isActive = false
@@ -103,16 +143,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.view.layoutIfNeeded()
             })
         })
-    }
-
-    func showCancelAndConfirmButtons() {
-        cancelButton.isHidden = false
-        confirmButton.isHidden = false
-    }
-    
-    func hideCancelAndConfirmButtons() {
-        cancelButton.isHidden = true
-        confirmButton.isHidden = true
     }
 
     func addVirtualOjbect(at index: Int) {
@@ -160,29 +190,41 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Actions
 
     @IBAction func addButtonTapped() {
-        addButton.isHidden = true
-        closeButton.isHidden = false
+        animateAddButton(hide: true, animated: true)
         showCollectionViewAndCloseButton()
     }
 
     @IBAction func closeButtonTapped() {
-        addButton.isHidden = false
-        closeButton.isHidden = true
+        animateAddButton(hide: false, animated: true)
         hideCollectionViewAndCloseButton(animated: true)
     }
 
     @IBAction func cancelButtonTapped() {
-        addButton.isHidden = false
-        hideCancelAndConfirmButtons()
+        animateAddButton(hide: false, animated: true)
+        animateCancelAndConfirmButtons(hide: true, animated: true)
+
+        currentHelperPlane?.removeFromParentNode()
+        currentHelperPlane = nil
     }
 
     @IBAction func confirmButtonTapped() {
+        animateCancelAndConfirmButtons(hide: true, animated: true)
+        animateAddButton(hide: false, animated: true)
 
+        currentHelperPlane?.removeFromParentNode()
+        currentHelperPlane = nil
+
+        addVirtualOjbect(at: selectedObjectIndex)
     }
 
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        messageManager.showMessage("FIND A SURFACE TO PLACE AN OBJECT")
+
+        if addButtonIsHidden() {
+            animateAddButton(hide: false, animated: true)
+        }
     }
 
     // MARK: - ARSessionObserver

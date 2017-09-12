@@ -45,7 +45,7 @@
                                     <action selector="addButtonTapped" destination="BV1-FR-VrT" eventType="touchUpInside" id="mkH-Xa-T3B"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hY-Qg-Dnx">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hY-Qg-Dnx">
                                 <rect key="frame" x="237.5" y="607" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -57,7 +57,7 @@
                                     <action selector="confirmButtonTapped" destination="BV1-FR-VrT" eventType="touchUpInside" id="GHb-qa-8KK"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-8w-VKg">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-8w-VKg">
                                 <rect key="frame" x="97.5" y="607" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -69,7 +69,7 @@
                                     <action selector="cancelButtonTapped" destination="BV1-FR-VrT" eventType="touchUpInside" id="IRp-vn-knB"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddu-RF-ucF">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddu-RF-ucF">
                                 <rect key="frame" x="87" y="607" width="200" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -81,7 +81,7 @@
                                     <action selector="closeButtonTapped" destination="BV1-FR-VrT" eventType="touchUpInside" id="LSy-gh-b7I"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-1F-Zm1">
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-1F-Zm1">
                                 <rect key="frame" x="315" y="607" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -97,29 +97,29 @@
                                     <constraint firstAttribute="height" priority="750" constant="506" id="1ui-cv-tYp"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pvY-m4-ZDR">
-                                    <size key="itemSize" width="100" height="130"/>
+                                    <size key="itemSize" width="100" height="115"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" reuseIdentifier="ObjectCell" id="E8N-vO-s9M" customClass="ObjectCollectionViewCell" customModule="ARKitDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="130"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mBr-rq-lCH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <rect key="frame" x="10" y="5" width="80" height="80"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mBr-rq-lCH" secondAttribute="height" multiplier="1:1" id="hRd-bp-qT4"/>
-                                                        <constraint firstAttribute="width" constant="100" id="o8s-rq-dcd"/>
+                                                        <constraint firstAttribute="width" constant="80" id="o8s-rq-dcd"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="object name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-qQ-l4c">
-                                                    <rect key="frame" x="2.5" y="105" width="95" height="25"/>
+                                                    <rect key="frame" x="2.5" y="90" width="95" height="25"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="LHT-2N-Jag"/>
@@ -132,7 +132,7 @@
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="mBr-rq-lCH" firstAttribute="top" secondItem="E8N-vO-s9M" secondAttribute="top" id="EHK-OI-749"/>
+                                            <constraint firstItem="mBr-rq-lCH" firstAttribute="top" secondItem="E8N-vO-s9M" secondAttribute="top" constant="5" id="EHK-OI-749"/>
                                             <constraint firstItem="mBr-rq-lCH" firstAttribute="centerX" secondItem="E8N-vO-s9M" secondAttribute="centerX" id="LQw-1u-8aI"/>
                                             <constraint firstItem="Mcp-qQ-l4c" firstAttribute="centerX" secondItem="E8N-vO-s9M" secondAttribute="centerX" id="jmb-C7-F1X"/>
                                             <constraint firstItem="Mcp-qQ-l4c" firstAttribute="top" secondItem="mBr-rq-lCH" secondAttribute="bottom" constant="5" id="rrj-j5-vP2"/>
@@ -177,6 +177,7 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="unF-zb-QfB" id="za3-Yt-K6a"/>
+                        <outlet property="addButtonBottomConstraint" destination="FfB-Li-HN9" id="EDv-bG-rRe"/>
                         <outlet property="cancelButton" destination="WPG-8w-VKg" id="Oug-Qq-kHg"/>
                         <outlet property="closeButton" destination="ddu-RF-ucF" id="Wuy-AR-aLs"/>
                         <outlet property="closeButtonBottomConstraint" destination="htI-gO-DPd" id="xRj-V6-oNk"/>
@@ -188,6 +189,9 @@
                         <outlet property="messageLabel" destination="rnq-PD-U9A" id="fsU-gp-b2y"/>
                         <outlet property="sceneView" destination="Lig-bd-bA0" id="HmR-uN-53m"/>
                         <outlet property="settingsButton" destination="0Te-1F-Zm1" id="9as-mJ-Qzl"/>
+                        <outlet property="settingsButtonTrailingConstraint" destination="9Tm-Xc-oz9" id="opi-MB-lu9"/>
+                        <outletCollection property="cancelAndConfirmButtonBottomConstraints" destination="yk0-CV-fqp" collectionClass="NSMutableArray" id="BFN-KN-Bd3"/>
+                        <outletCollection property="cancelAndConfirmButtonBottomConstraints" destination="QHi-Th-KoM" collectionClass="NSMutableArray" id="1SY-sD-0Kx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

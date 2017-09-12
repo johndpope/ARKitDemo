@@ -33,10 +33,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         hideCollectionViewAndCloseButton(animated: true)
-        showCancelAndConfirmButtons()
+        animateCancelAndConfirmButtons(hide: false, animated: true)
 
 //        addVirtualOjbect(at: indexPath.row)
         addPlacementHelperPlane(at: 0)
+        selectedObjectIndex = indexPath.row
     }
 
 }

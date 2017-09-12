@@ -99,7 +99,7 @@ class TwoFingerGesture: Gesture {
             if let object = VirtualObject.castNodeToVirtualObject(node: result.node) {
                 firstTouchedObject = object
                 break
-            } else if let object = PlacementHelperPlane.castNodeToPlacementHelperPlane(node: result.node) {
+            } else if let object = PlacementHelperNode.castNodeToPlacementHelperNode(node: result.node) {
                 firstTouchedObject = object
                 break
             }

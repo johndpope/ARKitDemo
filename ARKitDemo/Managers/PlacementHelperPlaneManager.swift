@@ -1,5 +1,5 @@
 //
-//  PlacementHelperPlaneManager.swift
+//  PlacementHelperNodeManager.swift
 //  ARKitDemo
 //
 //  Created by Lebron on 11/09/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import ARKit
 
-class PlacementHelperPlaneManager: ObjectManager {
+class PlacementHelperNodeManager: ObjectManager {
 
     var lastUsedObject: SCNNode?
 
@@ -44,7 +44,7 @@ class PlacementHelperPlaneManager: ObjectManager {
     }
 
     func setVirtualObject(_ object: SCNNode, to position: float3, cameraTransform: matrix_float4x4) {
-        guard let object = object as? PlacementHelperPlane else {
+        guard let object = object as? PlacementHelperNode else {
             return
         }
 
@@ -62,7 +62,7 @@ class PlacementHelperPlaneManager: ObjectManager {
     }
 
     func updateVirtualObject(_ object: SCNNode, to position: float3, filterPosition: Bool, cameraTransform: matrix_float4x4) {
-        guard let object = object as? PlacementHelperPlane else {
+        guard let object = object as? PlacementHelperNode else {
             return
         }
 
@@ -103,12 +103,12 @@ class PlacementHelperPlaneManager: ObjectManager {
                                                   sceneView: sceneView,
                                                   lastUsedObject: lastUsedObject,
                                                   objectManager: self)
-            if let newObject = currentGesture?.lastUsedObject as? PlacementHelperPlane {
+            if let newObject = currentGesture?.lastUsedObject as? PlacementHelperNode {
                 lastUsedObject = newObject
             }
         } else {
             currentGesture = currentGesture?.updateGesture(from: touches, .touchBegan)
-            if let newObject = currentGesture?.lastUsedObject as? PlacementHelperPlane {
+            if let newObject = currentGesture?.lastUsedObject as? PlacementHelperNode {
                 lastUsedObject = newObject
             }
         }
@@ -116,14 +116,14 @@ class PlacementHelperPlaneManager: ObjectManager {
 
     func reactToTouchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         currentGesture = currentGesture?.updateGesture(from: touches, .touchMoved)
-        if let newObject = currentGesture?.lastUsedObject as? PlacementHelperPlane {
+        if let newObject = currentGesture?.lastUsedObject as? PlacementHelperNode {
             lastUsedObject = newObject
         }
     }
 
     func reactToTouchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         currentGesture = currentGesture?.updateGesture(from: touches, .touchEnded)
-        if let newObject = currentGesture?.lastUsedObject as? PlacementHelperPlane {
+        if let newObject = currentGesture?.lastUsedObject as? PlacementHelperNode {
             lastUsedObject = newObject
         }
     }

@@ -36,7 +36,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         animateCancelAndConfirmButtons(hide: false, animated: true)
 
 //        addVirtualOjbect(at: indexPath.row)
-        addPlacementHelperPlane(at: 0)
+        addPlacementHelperNode(at: 0)
         selectedObjectIndex = indexPath.row
     }
 

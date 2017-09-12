@@ -19,7 +19,6 @@
 		FDF0BEF91F665EA700D09912 /* SingleFingerGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEF81F665EA700D09912 /* SingleFingerGesture.swift */; };
 		FDF0BEFB1F665EBA00D09912 /* TwoFingerGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEFA1F665EBA00D09912 /* TwoFingerGesture.swift */; };
 		FDF0BEFD1F66665400D09912 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEFC1F66665400D09912 /* CGPointExtensions.swift */; };
-		FDF0BEFF1F668C2300D09912 /* PlacementHelperPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEFE1F668C2300D09912 /* PlacementHelperPlane.swift */; };
 		FDF0BF011F66DA0C00D09912 /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BF001F66DA0C00D09912 /* ObjectManager.swift */; };
 		FDF0BF031F66DBCF00D09912 /* PlacementHelperPlaneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BF021F66DBCF00D09912 /* PlacementHelperPlaneManager.swift */; };
 		FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0C0201F6390D70052B12A /* AppDelegate.swift */; };
@@ -28,6 +27,7 @@
 		FDF0C0281F6390D70052B12A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0261F6390D70052B12A /* Main.storyboard */; };
 		FDF0C02A1F6390D70052B12A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C0291F6390D70052B12A /* Assets.xcassets */; };
 		FDF0C02D1F6390D70052B12A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDF0C02B1F6390D70052B12A /* LaunchScreen.storyboard */; };
+		FDF1CDC31F67FBD00037D633 /* PlacementHelperNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF1CDC21F67FBD00037D633 /* PlacementHelperNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,6 @@
 		FDF0BEF81F665EA700D09912 /* SingleFingerGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleFingerGesture.swift; sourceTree = "<group>"; };
 		FDF0BEFA1F665EBA00D09912 /* TwoFingerGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFingerGesture.swift; sourceTree = "<group>"; };
 		FDF0BEFC1F66665400D09912 /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
-		FDF0BEFE1F668C2300D09912 /* PlacementHelperPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementHelperPlane.swift; sourceTree = "<group>"; };
 		FDF0BF001F66DA0C00D09912 /* ObjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
 		FDF0BF021F66DBCF00D09912 /* PlacementHelperPlaneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementHelperPlaneManager.swift; sourceTree = "<group>"; };
 		FDF0C01D1F6390D70052B12A /* ARKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +53,7 @@
 		FDF0C0291F6390D70052B12A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDF0C02C1F6390D70052B12A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDF0C02E1F6390D70052B12A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDF1CDC21F67FBD00037D633 /* PlacementHelperNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacementHelperNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,6 @@
 		FDF0BECA1F65524000D09912 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FDF0BEFE1F668C2300D09912 /* PlacementHelperPlane.swift */,
 				FDF0BECB1F65525B00D09912 /* VirtualObject.swift */,
 			);
 			path = Models;
@@ -126,6 +125,7 @@
 		FDF0C01F1F6390D70052B12A /* ARKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FDF1CDBF1F67E5020037D633 /* Placement Helper */,
 				FDF0BEF51F665C8600D09912 /* Gesture */,
 				FDF0BECD1F655D7D00D09912 /* Extensions */,
 				FDF0BECA1F65524000D09912 /* Models */,
@@ -158,6 +158,14 @@
 				FDF0C0221F6390D70052B12A /* Models.scnassets */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FDF1CDBF1F67E5020037D633 /* Placement Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FDF1CDC21F67FBD00037D633 /* PlacementHelperNode.swift */,
+			);
+			path = "Placement Helper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +244,6 @@
 			files = (
 				FDF0BF031F66DBCF00D09912 /* PlacementHelperPlaneManager.swift in Sources */,
 				FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */,
-				FDF0BEFF1F668C2300D09912 /* PlacementHelperPlane.swift in Sources */,
 				FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */,
 				FDF0BEFB1F665EBA00D09912 /* TwoFingerGesture.swift in Sources */,
 				FDF0BEC71F654FA200D09912 /* VirtualObjectManager.swift in Sources */,
@@ -246,6 +253,7 @@
 				FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */,
 				FDF0BECC1F65525B00D09912 /* VirtualObject.swift in Sources */,
 				FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */,
+				FDF1CDC31F67FBD00037D633 /* PlacementHelperNode.swift in Sources */,
 				FDF0BEFD1F66665400D09912 /* CGPointExtensions.swift in Sources */,
 				FDF0BF011F66DA0C00D09912 /* ObjectManager.swift in Sources */,
 				FDF0BEEF1F66141E00D09912 /* ARSCNViewExtensions.swift in Sources */,

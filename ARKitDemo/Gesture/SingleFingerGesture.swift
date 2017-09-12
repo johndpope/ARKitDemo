@@ -44,7 +44,7 @@ class SingleFingerGesture: Gesture {
             if let object = VirtualObject.castNodeToVirtualObject(node: result.node) {
                 firstTouchedObject = object
                 break
-            } else if let object = PlacementHelperPlane.castNodeToPlacementHelperPlane(node: result.node) {
+            } else if let object = PlacementHelperNode.castNodeToPlacementHelperNode(node: result.node) {
                 firstTouchedObject = object
                 break
             }
@@ -107,7 +107,7 @@ class SingleFingerGesture: Gesture {
             if VirtualObject.castNodeToVirtualObject(node: result.node) != nil {
                 objectHit = true
                 break
-            } else if PlacementHelperPlane.castNodeToPlacementHelperPlane(node: result.node) != nil {
+            } else if PlacementHelperNode.castNodeToPlacementHelperNode(node: result.node) != nil {
                 objectHit = true
                 break
             }

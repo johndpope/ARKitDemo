@@ -33,13 +33,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     var messageManager: MessageManager!
 
-    var currentHelperPlane: PlacementHelperPlane?
+    var currentHelperNode: PlacementHelperNode?
     var selectedObjectIndex: Int = 0
 
     lazy var virtualObjectManager = VirtualObjectManager()
-    lazy var placementHelperPlaneManager = PlacementHelperPlaneManager()
+    lazy var placementHelperNodeManager = PlacementHelperNodeManager()
     var objectManager: ObjectManager {
-        return (currentHelperPlane == nil) ? virtualObjectManager : placementHelperPlaneManager
+        return (currentHelperNode == nil) ? virtualObjectManager : placementHelperNodeManager
     }
 
     // MARK: - View life cycle
@@ -173,18 +173,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
 
-    func addPlacementHelperPlane(at index: Int) {
+    func addPlacementHelperNode(at index: Int) {
         let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
         let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
 
-        let helperPlane = PlacementHelperPlane()
-        helperPlane.simdPosition = worldPosition ?? float3(0)
+        let helperNode = PlacementHelperNode()
+        helperNode.simdPosition = worldPosition ?? float3(0)
 
         DispatchQueue.global().async {
-            self.sceneView.scene.rootNode.addChildNode(helperPlane)
+            self.sceneView.scene.rootNode.addChildNode(helperNode)
         }
 
-        currentHelperPlane = helperPlane
+        currentHelperNode = helperNode
     }
 
     // MARK: - Actions
@@ -203,16 +203,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         animateAddButton(hide: false, animated: true)
         animateCancelAndConfirmButtons(hide: true, animated: true)
 
-        currentHelperPlane?.removeFromParentNode()
-        currentHelperPlane = nil
+        currentHelperNode?.removeFromParentNode()
+        currentHelperNode = nil
     }
 
     @IBAction func confirmButtonTapped() {
         animateCancelAndConfirmButtons(hide: true, animated: true)
         animateAddButton(hide: false, animated: true)
 
-        currentHelperPlane?.removeFromParentNode()
-        currentHelperPlane = nil
+        currentHelperNode?.removeFromParentNode()
+        currentHelperNode = nil
 
         addVirtualOjbect(at: selectedObjectIndex)
     }

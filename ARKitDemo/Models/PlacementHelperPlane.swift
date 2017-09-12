@@ -14,6 +14,9 @@ class PlacementHelperPlane: SCNNode {
 //    var anchor: ARPlaneAnchor
     var planeGeometry: SCNBox
 
+    // Use average of recent virtual object distances to avoid rapid changes in object scale.
+    var recentDistances: [Float] = []
+
     override init() {
 //        self.anchor = anchor
 
@@ -113,3 +116,18 @@ class PlacementHelperPlane: SCNNode {
 
 }
 
+extension PlacementHelperPlane {
+
+    static func castNodeToPlacementHelperPlane(node: SCNNode) -> PlacementHelperPlane? {
+        if let virtualObjectRoot = node as? PlacementHelperPlane {
+            return virtualObjectRoot
+        }
+
+        if node.parent != nil {
+            return castNodeToPlacementHelperPlane(node: node.parent!)
+        }
+
+        return nil
+    }
+
+}

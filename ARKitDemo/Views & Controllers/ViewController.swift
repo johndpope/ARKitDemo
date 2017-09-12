@@ -29,7 +29,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var closeButtonBottomConstraint: NSLayoutConstraint!
 
     var messageManager: MessageManager!
+
+    var currentHelperPlane: PlacementHelperPlane?
+
     lazy var virtualObjectManager = VirtualObjectManager()
+    lazy var placementHelperPlaneManager = PlacementHelperPlaneManager()
+    var objectManager: ObjectManager {
+        return (currentHelperPlane == nil) ? virtualObjectManager : placementHelperPlaneManager
+    }
 
     // MARK: - View life cycle
 
@@ -117,16 +124,37 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let object = VirtualObject(definition: definition)
 
         let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
-        let (worldPosition, _, _) = virtualObjectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
+        let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
         let position = worldPosition ?? float3(0)
 
+        guard let virtualObjectManager = objectManager as? VirtualObjectManager else {
+            return
+        }
+
         virtualObjectManager.loadVirtualObject(object, to: position, cameraTransform: cameraTransform)
+
+        object.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        object.physicsBody?.mass = 2
 
         if object.parent == nil {
             DispatchQueue.global().async {
                 self.sceneView.scene.rootNode.addChildNode(object)
             }
         }
+    }
+
+    func addPlacementHelperPlane(at index: Int) {
+        let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
+        let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
+
+        let helperPlane = PlacementHelperPlane()
+        helperPlane.simdPosition = worldPosition ?? float3(0)
+
+        DispatchQueue.global().async {
+            self.sceneView.scene.rootNode.addChildNode(helperPlane)
+        }
+
+        currentHelperPlane = helperPlane
     }
 
     // MARK: - Actions
@@ -181,19 +209,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Gesture Recognizers
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        virtualObjectManager.reactToTouchesBegan(touches, with: event, in: self.sceneView)
+        objectManager.reactToTouchesBegan(touches, with: event, in: self.sceneView)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        virtualObjectManager.reactToTouchesMoved(touches, with: event)
+        objectManager.reactToTouchesMoved(touches, with: event)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        virtualObjectManager.reactToTouchesEnded(touches, with: event)
+        objectManager.reactToTouchesEnded(touches, with: event)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        virtualObjectManager.reactToTouchesCancelled(touches, with: event)
+        objectManager.reactToTouchesCancelled(touches, with: event)
     }
 
 }

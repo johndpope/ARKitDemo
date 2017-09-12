@@ -35,7 +35,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         hideCollectionViewAndCloseButton(animated: true)
         showCancelAndConfirmButtons()
 
-        addVirtualOjbect(at: indexPath.row)
+//        addVirtualOjbect(at: indexPath.row)
+        addPlacementHelperPlane(at: 0)
     }
 
 }

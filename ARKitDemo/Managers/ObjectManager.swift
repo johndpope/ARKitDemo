@@ -1,0 +1,169 @@
+//
+//  ObjectManager.swift
+//  ARKitDemo
+//
+//  Created by Lebron on 11/09/2017.
+//  Copyright © 2017 HackNCraft. All rights reserved.
+//
+
+import Foundation
+import ARKit
+
+protocol ObjectManager {
+
+    var lastUsedObject: SCNNode? { get set }
+
+    // MARK: - Update Object Position
+
+    func translate(_ object: SCNNode, in sceneView: ARSCNView, basedOn screenPosition: CGPoint, instantly: Bool, infinitePlane: Bool)
+
+    func setPosition(for object: SCNNode, position: float3, instantly: Bool, filterPosition: Bool, cameraTransform: matrix_float4x4)
+
+    func setVirtualObject(_ object: SCNNode, to position: float3, cameraTransform: matrix_float4x4)
+
+     func updateVirtualObject(_ object: SCNNode, to position: float3, filterPosition: Bool, cameraTransform: matrix_float4x4)
+
+    func checkIfObjectShouldMoveOntoPlane(planeAnchor: ARPlaneAnchor, planeAnchorNode: SCNNode)
+
+    func transform(for object: SCNNode, cameraTransform: matrix_float4x4) -> (distance: Float, rotation: Int, scale: Float)
+
+    func worldPosition(from screenPosition: CGPoint, in sceneView: ARSCNView, objectPosition: float3?, infinitePlane: Bool) -> (position: float3?, planeAnchor: ARPlaneAnchor? , hitAPlane: Bool)
+
+    // MARK: - React to gestures
+
+    var currentGesture: Gesture? { get set }
+
+    func reactToTouchesBegan(_ touches: Set<UITouch>, with event: UIEvent?, in sceneView: ARSCNView)
+
+    func reactToTouchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
+
+    func reactToTouchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+
+    func reactToTouchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?)
+
+}
+
+extension ObjectManager {
+
+    func checkIfObjectShouldMoveOntoPlane(planeAnchor: ARPlaneAnchor, planeAnchorNode: SCNNode) {
+        guard let object = lastUsedObject else {
+            return
+        }
+
+        // Get the object's position in the plane's coordinate system.
+        let objectPosition = planeAnchorNode.convertPosition(object.position, from: object.parent)
+
+        if objectPosition.y == 0 {
+            return // The object is already on the plane - nothing to do here.
+        }
+
+        // Add 10% tolerance to the corners of the plane.
+        let tolerance: Float = 0.1
+
+        let minX: Float = planeAnchor.center.x - planeAnchor.extent.x / 2 - planeAnchor.extent.x * tolerance
+        let maxX: Float = planeAnchor.center.x + planeAnchor.extent.x / 2 + planeAnchor.extent.x * tolerance
+        let minZ: Float = planeAnchor.center.z - planeAnchor.extent.z / 2 - planeAnchor.extent.z * tolerance
+        let maxZ: Float = planeAnchor.center.z + planeAnchor.extent.z / 2 + planeAnchor.extent.z * tolerance
+
+        if objectPosition.x < minX || objectPosition.x > maxX || objectPosition.z < minZ || objectPosition.z > maxZ {
+            return
+        }
+
+        // Move the object onto the plane if it is near it (within 5 centimeters).
+        let verticalAllowance: Float = 0.05
+        // Do not bother updating if the different is less than a mm.
+        let epsilon: Float = 0.001
+        let distanceToPlane = abs(objectPosition.y)
+
+        if distanceToPlane > epsilon && distanceToPlane < verticalAllowance {
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = CFTimeInterval(distanceToPlane * 500) // Move 2 mm per second.
+            SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            object.position.y = planeAnchor.transform.columns.3.y
+            SCNTransaction.commit()
+        }
+    }
+
+    func transform(for object: SCNNode, cameraTransform: matrix_float4x4) -> (distance: Float, rotation: Int, scale: Float) {
+        let cameraWorldPosition = cameraTransform.translation
+        let vectorToCamera = cameraWorldPosition - object.simdPosition
+
+        let distanceToUser = simd_length(vectorToCamera)
+
+        var angleDegrees = Int((object.eulerAngles.y * 180) / .pi) % 360
+        if angleDegrees < 0 {
+            angleDegrees += 360
+        }
+
+        return (distanceToUser, angleDegrees, object.scale.x)
+    }
+
+    func worldPosition(from screenPosition: CGPoint, in sceneView: ARSCNView, objectPosition: float3?, infinitePlane: Bool = false) -> (position: float3?, planeAnchor: ARPlaneAnchor? , hitAPlane: Bool) {
+        let dragOnInfinitePlanesEnabled = true
+
+        // -------------------------------------------------------------------------------
+        // 1. Always do a hit test against exisiting plane anchors first.
+        //    (If any such anchors exist & only within their extents.)
+
+        let planeHitTestResults = sceneView.hitTest(screenPosition, types: .existingPlaneUsingExtent)
+        if let result = planeHitTestResults.first {
+
+            let planeHitTestPosition = result.worldTransform.translation
+            let planeAnchor = result.anchor
+
+            // Return immediately - this is the best possible outcome.
+            return (planeHitTestPosition, planeAnchor as? ARPlaneAnchor, true)
+        }
+
+        // -------------------------------------------------------------------------------
+        // 2. Collect more information about the environment by hit testing against
+        //    the feature point cloud, but do not return the result yet.
+
+        var featureHitTestPosition: float3?
+        var highQualityFeatureHitTestResult = false
+
+        let highQualityfeatureHitTestResults = sceneView.hitTestWithFeatures(screenPosition, coneOpeningAngleInDegrees: 18, minDistance: 0.2, maxDistance: 2.0)
+
+        if !highQualityfeatureHitTestResults.isEmpty {
+            let result = highQualityfeatureHitTestResults[0]
+            featureHitTestPosition = result.position
+            highQualityFeatureHitTestResult = true
+        }
+
+        // -------------------------------------------------------------------------------
+        // 3. If desired or necessary (no good feature hit test result): Hit test
+        //    against an infinite, horizontal plane (ignoring the real world).
+
+        if (infinitePlane && dragOnInfinitePlanesEnabled) || !highQualityFeatureHitTestResult {
+
+            if let pointOnPlane = objectPosition {
+                let pointOnInfinitePlane = sceneView.hitTestWithInfiniteHorizontalPlane(screenPosition, pointOnPlane)
+                if pointOnInfinitePlane != nil {
+                    return (pointOnInfinitePlane, nil, true)
+                }
+            }
+        }
+
+        // -------------------------------------------------------------------------------
+        // 4. If available, return the result of the hit test against high quality
+        //    features if the hit tests against infinite planes were skipped or no
+        //    infinite plane was hit.
+
+        if highQualityFeatureHitTestResult {
+            return (featureHitTestPosition, nil, false)
+        }
+
+        // -------------------------------------------------------------------------------
+        // 5. As a last resort, perform a second, unfiltered hit test against features.
+        //    If there are no features in the scene, the result returned here will be nil.
+
+        let unfilteredFeatureHitTestResults = sceneView.hitTestWithFeatures(screenPosition)
+        if !unfilteredFeatureHitTestResults.isEmpty {
+            let result = unfilteredFeatureHitTestResults[0]
+            return (result.position, nil, false)
+        }
+
+        return (nil, nil, false)
+    }
+
+}

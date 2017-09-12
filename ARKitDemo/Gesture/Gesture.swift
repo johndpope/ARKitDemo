@@ -23,18 +23,18 @@ class Gesture {
     // MARK: - Properties
 
     let sceneView: ARSCNView
-    let objectManager: VirtualObjectManager
+    let objectManager: ObjectManager
 
     var refreshTimer: Timer?
-    var lastUsedObject: VirtualObject?
+    var lastUsedObject: SCNNode?
     var currentTouches = Set<UITouch>()
 
     // MARK: - Initialization
 
     init(touches: Set<UITouch>,
          sceneView: ARSCNView,
-         lastUsedObject: VirtualObject?,
-         objectManager: VirtualObjectManager) {
+         lastUsedObject: SCNNode?,
+         objectManager: ObjectManager) {
         currentTouches = touches
         self.sceneView = sceneView
         self.lastUsedObject = lastUsedObject
@@ -51,8 +51,8 @@ class Gesture {
 
     static func startGesture(from touches: Set<UITouch>,
                              sceneView: ARSCNView,
-                             lastUsedObject: VirtualObject?,
-                             objectManager: VirtualObjectManager) -> Gesture? {
+                             lastUsedObject: SCNNode?,
+                             objectManager: ObjectManager) -> Gesture? {
         if touches.count == 1 {
             return SingleFingerGesture(touches: touches, sceneView: sceneView, lastUsedObject: lastUsedObject, objectManager: objectManager)
         } else if touches.count == 2 {

@@ -19,15 +19,15 @@ class SingleFingerGesture: Gesture {
     let translationThreshold: CGFloat = 30
     var translationThresholdPassed = false
     var hasMovedObject = false
-    var firstTouchedObject: VirtualObject?
+    var firstTouchedObject: SCNNode?
     var dragOffset = CGPoint()
 
     // MARK: - Initialization
 
     override init(touches: Set<UITouch>,
                   sceneView: ARSCNView,
-                  lastUsedObject: VirtualObject?,
-                  objectManager: VirtualObjectManager) {
+                  lastUsedObject: SCNNode?,
+                  objectManager: ObjectManager) {
 
         super.init(touches: touches,
                    sceneView: sceneView,
@@ -42,6 +42,9 @@ class SingleFingerGesture: Gesture {
         let results = sceneView.hitTest(initialTouchLocation, options: [SCNHitTestOption.boundingBoxOnly: true])
         for result in results {
             if let object = VirtualObject.castNodeToVirtualObject(node: result.node) {
+                firstTouchedObject = object
+                break
+            } else if let object = PlacementHelperPlane.castNodeToPlacementHelperPlane(node: result.node) {
                 firstTouchedObject = object
                 break
             }
@@ -102,6 +105,9 @@ class SingleFingerGesture: Gesture {
         // The user has touched the virtual object.
         for result in results {
             if VirtualObject.castNodeToVirtualObject(node: result.node) != nil {
+                objectHit = true
+                break
+            } else if PlacementHelperPlane.castNodeToPlacementHelperPlane(node: result.node) != nil {
                 objectHit = true
                 break
             }

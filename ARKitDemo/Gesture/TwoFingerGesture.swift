@@ -29,7 +29,7 @@ class TwoFingerGesture: Gesture {
     var allowRotation = false
     var initialFingerAngle: Float = 0
     var initialObjectAngle: Float = 0
-    var firstTouchedObject: VirtualObject?
+    var firstTouchedObject: SCNNode?
 
     let scaleThreshold: CGFloat = 50
     let scaleThresholdHarder: CGFloat = 90
@@ -43,8 +43,8 @@ class TwoFingerGesture: Gesture {
 
     override init(touches: Set<UITouch>,
                   sceneView: ARSCNView,
-                  lastUsedObject: VirtualObject?,
-                  objectManager: VirtualObjectManager) {
+                  lastUsedObject: SCNNode?,
+                  objectManager: ObjectManager) {
 
         super.init(touches: touches,
                    sceneView: sceneView,
@@ -99,6 +99,9 @@ class TwoFingerGesture: Gesture {
             if let object = VirtualObject.castNodeToVirtualObject(node: result.node) {
                 firstTouchedObject = object
                 break
+            } else if let object = PlacementHelperPlane.castNodeToPlacementHelperPlane(node: result.node) {
+                firstTouchedObject = object
+                break
             }
         }
 
@@ -123,7 +126,7 @@ class TwoFingerGesture: Gesture {
     // MARK: - Gesture Handling
 
     func updateGesture() {
-        guard let virtualObject = firstTouchedObject else {
+        guard let object = firstTouchedObject else {
             return
         }
 
@@ -146,21 +149,21 @@ class TwoFingerGesture: Gesture {
 
         if allowTranslation {
             // 1. Translation using the midpoint between the two fingers.
-            updateTranslation(of: virtualObject, midpoint: loc1.midpoint(loc2))
+            updateTranslation(of: object, midpoint: loc1.midpoint(loc2))
         }
 
         let spanBetweenTouches = loc1 - loc2
         if allowRotation {
             // 2. Rotation based on the relative rotation of the fingers on a unit circle.
-            updateRotation(of: virtualObject, span: spanBetweenTouches)
+            updateRotation(of: object, span: spanBetweenTouches)
         }
         if allowScaling {
             // 3. Scale based on the distance between the fingers relative to initial distance.
-            updateScaling(of: virtualObject, span: spanBetweenTouches)
+            updateScaling(of: object, span: spanBetweenTouches)
         }
     }
 
-    func updateTranslation(of virtualObject: VirtualObject, midpoint: CGPoint) {
+    func updateTranslation(of object: SCNNode, midpoint: CGPoint) {
         if !translationThresholdPassed {
 
             let initialLocationToCurrentLocation = midpoint - initialMidPoint
@@ -177,19 +180,19 @@ class TwoFingerGesture: Gesture {
             if distanceFromStartLocation >= threshold {
                 translationThresholdPassed = true
 
-                let currentObjectLocation = CGPoint(sceneView.projectPoint(virtualObject.position))
+                let currentObjectLocation = CGPoint(sceneView.projectPoint(object.position))
                 dragOffset = midpoint - currentObjectLocation
             }
         }
 
         if translationThresholdPassed {
             let offsetPosition = midpoint - dragOffset
-            objectManager.translate(virtualObject, in: sceneView, basedOn: offsetPosition, instantly: false, infinitePlane: true)
-            lastUsedObject = virtualObject
+            objectManager.translate(object, in: sceneView, basedOn: offsetPosition, instantly: false, infinitePlane: true)
+            lastUsedObject = object
         }
     }
 
-    func updateRotation(of virtualObject: VirtualObject, span: CGPoint) {
+    func updateRotation(of object: SCNNode, span: CGPoint) {
         let midpointToFirstTouch = span / 2
         let currentAngle = atan2(Float(midpointToFirstTouch.x), Float(midpointToFirstTouch.y))
 
@@ -220,12 +223,12 @@ class TwoFingerGesture: Gesture {
             // For looking down on the object (99% of all use cases), we need to subtract the angle.
             // To make rotation also work correctly when looking from below the object one would have to
             // flip the sign of the angle depending on whether the object is above or below the camera...
-            virtualObject.eulerAngles.y = initialObjectAngle - currentAngleToInitialFingerAngle
-            lastUsedObject = virtualObject
+            object.eulerAngles.y = initialObjectAngle - currentAngleToInitialFingerAngle
+            lastUsedObject = object
         }
     }
 
-    func updateScaling(of virtualObject: VirtualObject, span: CGPoint) {
+    func updateScaling(of object: SCNNode, span: CGPoint) {
         let distanceBetweenFingers = span.length()
 
         if !scaleThresholdPassed {
@@ -254,11 +257,11 @@ class TwoFingerGesture: Gesture {
                 newScale = 1.0
             }
 
-            virtualObject.simdScale = float3(newScale)
-            lastUsedObject = virtualObject
+            object.simdScale = float3(newScale)
+            lastUsedObject = object
 
             DispatchQueue.global().async {
-                if let nodeWhichReactsToScale = virtualObject.reactsToScale() {
+                if let nodeWhichReactsToScale = object.reactsToScale() {
                     nodeWhichReactsToScale.reactToScale()
                 }
             }

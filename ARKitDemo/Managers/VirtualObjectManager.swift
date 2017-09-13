@@ -70,11 +70,21 @@ class VirtualObjectManager: ObjectManager {
         virtualObjects.append(object)
 
         DispatchQueue.global().async {
-            object.loadModel()
-            object.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-            object.physicsBody?.mass = 2
-            self.setVirtualObject(object, to: position, cameraTransform: cameraTransform)
             self.lastUsedObject = object
+
+            object.loadModel()
+            self.setVirtualObject(object, to: position, cameraTransform: cameraTransform)
+
+            let actualPosition = object.position
+            // We insert the geometry slightly above the actual position, so that it drops onto the plane using the physics engine
+            let insertionYOffset: Float = 1
+            object.simdPosition.y = actualPosition.y + insertionYOffset
+
+            SCNTransaction.begin()
+            SCNTransaction.animationDuration = 0.75
+            SCNTransaction.animationTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+            object.simdPosition.y = actualPosition.y
+            SCNTransaction.commit()
         }
     }
 

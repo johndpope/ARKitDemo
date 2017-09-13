@@ -38,8 +38,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var currentHelperNodePosition = float3(0, 0, 0)
     var selectedObjectIndex: Int = 0
 
-    var largeTransparentPlane: SCNNode?
-
     lazy var virtualObjectManager = VirtualObjectManager()
     lazy var placementHelperNodeManager = PlacementHelperNodeManager()
     var objectManager: ObjectManager {
@@ -182,22 +180,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         currentHelperNode = helperNode
     }
 
-    func addALargeTransparentPlane() {
-        let material = SCNMaterial()
-        material.diffuse.contents = UIColor(white: 1, alpha: 0)
-
-        let bottomPlane = SCNBox(width: 1000, height: 0.001, length: 1000, chamferRadius: 0)
-        bottomPlane.materials = [material]
-
-        let planeNode = SCNNode(geometry: bottomPlane)
-        planeNode.simdPosition = worldPositionFromScreenCenter()
-        planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
-
-        sceneView.scene.rootNode.addChildNode(planeNode)
-
-        largeTransparentPlane = planeNode
-    }
-
     func worldPositionFromScreenCenter() -> float3 {
         let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
         let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
@@ -242,14 +224,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - ARSCNViewDelegate
 
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        messageManager.showMessage("FIND A SURFACE TO PLACE AN OBJECT")
-
-        if addButtonIsHidden() {
-            animateAddButton(hide: false, animated: true)
-        }
-
-        if largeTransparentPlane == nil {
-            addALargeTransparentPlane()
+        DispatchQueue.main.async {
+            if self.addButtonIsHidden() {
+                self.animateAddButton(hide: false, animated: true)
+                self.messageManager.showMessage("FIND A SURFACE TO PLACE AN OBJECT")
+            }
         }
     }
 

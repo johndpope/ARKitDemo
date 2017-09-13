@@ -72,6 +72,8 @@ class VirtualObjectManager: ObjectManager {
 
         DispatchQueue.global().async {
             object.loadModel()
+            object.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+            object.physicsBody?.mass = 2
             self.setVirtualObject(object, to: position, cameraTransform: cameraTransform)
             self.lastUsedObject = object
         }

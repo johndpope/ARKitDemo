@@ -34,7 +34,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var messageManager: MessageManager!
 
     var currentHelperNode: PlacementHelperNode?
+    var currentHelperNodeAngle: Float = 0
+    var currentHelperNodePosition = float3(0, 0, 0)
     var selectedObjectIndex: Int = 0
+
+    var largeTransparentPlane: SCNNode?
 
     lazy var virtualObjectManager = VirtualObjectManager()
     lazy var placementHelperNodeManager = PlacementHelperNodeManager()
@@ -74,7 +78,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
 
     // MARK: - Private Methods
@@ -153,18 +156,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let definition = VirtualObjectManager.availableObjectDefinitions[index]
         let object = VirtualObject(definition: definition)
 
-        let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
-        let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
-        let position = worldPosition ?? float3(0)
-
         guard let virtualObjectManager = objectManager as? VirtualObjectManager else {
             return
         }
 
-        virtualObjectManager.loadVirtualObject(object, to: position, cameraTransform: cameraTransform)
+        virtualObjectManager.loadVirtualObject(object, to: currentHelperNodePosition, cameraTransform: cameraTransform)
 
-        object.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        object.physicsBody?.mass = 2
+        object.eulerAngles.y = currentHelperNodeAngle
 
         if object.parent == nil {
             DispatchQueue.global().async {
@@ -174,17 +172,36 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
 
     func addPlacementHelperNode(at index: Int) {
-        let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
-        let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
-
         let helperNode = PlacementHelperNode()
-        helperNode.simdPosition = worldPosition ?? float3(0)
+        helperNode.simdPosition = worldPositionFromScreenCenter()
 
         DispatchQueue.global().async {
             self.sceneView.scene.rootNode.addChildNode(helperNode)
         }
 
         currentHelperNode = helperNode
+    }
+
+    func addALargeTransparentPlane() {
+        let material = SCNMaterial()
+        material.diffuse.contents = UIColor(white: 1, alpha: 0)
+
+        let bottomPlane = SCNBox(width: 1000, height: 0.001, length: 1000, chamferRadius: 0)
+        bottomPlane.materials = [material]
+
+        let planeNode = SCNNode(geometry: bottomPlane)
+        planeNode.simdPosition = worldPositionFromScreenCenter()
+        planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+
+        sceneView.scene.rootNode.addChildNode(planeNode)
+
+        largeTransparentPlane = planeNode
+    }
+
+    func worldPositionFromScreenCenter() -> float3 {
+        let screenCenter = CGPoint(x: sceneView.bounds.midX, y: sceneView.bounds.midY)
+        let (worldPosition, _, _) = objectManager.worldPosition(from: screenCenter, in: sceneView, objectPosition: float3(0))
+        return worldPosition ?? float3(0)
     }
 
     // MARK: - Actions
@@ -211,6 +228,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         animateCancelAndConfirmButtons(hide: true, animated: true)
         animateAddButton(hide: false, animated: true)
 
+        if let helperNode = currentHelperNode {
+            currentHelperNodeAngle = helperNode.eulerAngles.y
+            currentHelperNodePosition = helperNode.simdPosition
+        }
+
         currentHelperNode?.removeFromParentNode()
         currentHelperNode = nil
 
@@ -224,6 +246,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         if addButtonIsHidden() {
             animateAddButton(hide: false, animated: true)
+        }
+
+        if largeTransparentPlane == nil {
+            addALargeTransparentPlane()
         }
     }
 

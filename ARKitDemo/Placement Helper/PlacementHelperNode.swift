@@ -11,9 +11,7 @@ import Foundation
 import SceneKit
 import ARKit
 
-class PlacementHelperNode: SCNNode {
-
-    var recentDistances: [Float] = []
+class PlacementHelperNode: Object {
 
     override init() {
         super.init()

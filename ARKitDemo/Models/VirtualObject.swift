@@ -31,13 +31,10 @@ struct VirtualObjectDefinition: Codable, Equatable {
 
 }
 
-class VirtualObject: SCNNode {
+class VirtualObject: Object {
 
     let definition: VirtualObjectDefinition
     let referenceNode: SCNReferenceNode
-
-    // Use average of recent virtual object distances to avoid rapid changes in object scale.
-    var recentDistances: [Float] = []
 
     init(definition: VirtualObjectDefinition) {
         self.definition = definition

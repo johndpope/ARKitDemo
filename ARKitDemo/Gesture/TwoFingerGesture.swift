@@ -29,7 +29,7 @@ class TwoFingerGesture: Gesture {
     var allowRotation = false
     var initialFingerAngle: Float = 0
     var initialObjectAngle: Float = 0
-    var firstTouchedObject: SCNNode?
+    var firstTouchedObject: Object?
 
     let scaleThreshold: CGFloat = 50
     let scaleThresholdHarder: CGFloat = 90
@@ -43,7 +43,7 @@ class TwoFingerGesture: Gesture {
 
     override init(touches: Set<UITouch>,
                   sceneView: ARSCNView,
-                  lastUsedObject: SCNNode?,
+                  lastUsedObject: Object?,
                   objectManager: ObjectManager) {
 
         super.init(touches: touches,
@@ -163,7 +163,7 @@ class TwoFingerGesture: Gesture {
         }
     }
 
-    func updateTranslation(of object: SCNNode, midpoint: CGPoint) {
+    func updateTranslation(of object: Object, midpoint: CGPoint) {
         if !translationThresholdPassed {
 
             let initialLocationToCurrentLocation = midpoint - initialMidPoint
@@ -192,7 +192,7 @@ class TwoFingerGesture: Gesture {
         }
     }
 
-    func updateRotation(of object: SCNNode, span: CGPoint) {
+    func updateRotation(of object: Object, span: CGPoint) {
         let midpointToFirstTouch = span / 2
         let currentAngle = atan2(Float(midpointToFirstTouch.x), Float(midpointToFirstTouch.y))
 
@@ -228,7 +228,7 @@ class TwoFingerGesture: Gesture {
         }
     }
 
-    func updateScaling(of object: SCNNode, span: CGPoint) {
+    func updateScaling(of object: Object, span: CGPoint) {
         let distanceBetweenFingers = span.length()
 
         if !scaleThresholdPassed {

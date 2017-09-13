@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD705C921F68E366009AE32C /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD705C911F68E366009AE32C /* Object.swift */; };
 		FDF0BEC01F64D77500D09912 /* ObjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */; };
 		FDF0BEC21F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */; };
 		FDF0BEC51F65464400D09912 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF0BEC41F65464400D09912 /* MessageManager.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD705C911F68E366009AE32C /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		FDF0BEBF1F64D77500D09912 /* ObjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		FDF0BEC11F64D9AF00D09912 /* ViewControllerCollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCollectionViewExtensions.swift; sourceTree = "<group>"; };
 		FDF0BEC41F65464400D09912 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		FDF0C0141F6390D70052B12A = {
 			isa = PBXGroup;
 			children = (
+				FD705C911F68E366009AE32C /* Object.swift */,
 				FDF0C01F1F6390D70052B12A /* ARKitDemo */,
 				FDF0C01E1F6390D70052B12A /* Products */,
 			);
@@ -250,6 +253,7 @@
 				FDF0BECF1F65903C00D09912 /* Extensions.swift in Sources */,
 				FDF0BEF91F665EA700D09912 /* SingleFingerGesture.swift in Sources */,
 				FDF0BEC51F65464400D09912 /* MessageManager.swift in Sources */,
+				FD705C921F68E366009AE32C /* Object.swift in Sources */,
 				FDF0C0251F6390D70052B12A /* ViewController.swift in Sources */,
 				FDF0BECC1F65525B00D09912 /* VirtualObject.swift in Sources */,
 				FDF0C0211F6390D70052B12A /* AppDelegate.swift in Sources */,

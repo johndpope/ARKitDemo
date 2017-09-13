@@ -19,14 +19,14 @@ class SingleFingerGesture: Gesture {
     let translationThreshold: CGFloat = 30
     var translationThresholdPassed = false
     var hasMovedObject = false
-    var firstTouchedObject: SCNNode?
+    var firstTouchedObject: Object?
     var dragOffset = CGPoint()
 
     // MARK: - Initialization
 
     override init(touches: Set<UITouch>,
                   sceneView: ARSCNView,
-                  lastUsedObject: SCNNode?,
+                  lastUsedObject: Object?,
                   objectManager: ObjectManager) {
 
         super.init(touches: touches,

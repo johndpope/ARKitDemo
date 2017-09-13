@@ -11,17 +11,17 @@ import ARKit
 
 protocol ObjectManager {
 
-    var lastUsedObject: SCNNode? { get set }
+    var lastUsedObject: Object? { get set }
 
     // MARK: - Update Object Position
 
-    func translate(_ object: SCNNode, in sceneView: ARSCNView, basedOn screenPosition: CGPoint, instantly: Bool, infinitePlane: Bool)
+    func translate(_ object: Object, in sceneView: ARSCNView, basedOn screenPosition: CGPoint, instantly: Bool, infinitePlane: Bool)
 
-    func setPosition(for object: SCNNode, position: float3, instantly: Bool, filterPosition: Bool, cameraTransform: matrix_float4x4)
+    func setPosition(for object: Object, position: float3, instantly: Bool, filterPosition: Bool, cameraTransform: matrix_float4x4)
 
-    func setVirtualObject(_ object: SCNNode, to position: float3, cameraTransform: matrix_float4x4)
+    func setVirtualObject(_ object: Object, to position: float3, cameraTransform: matrix_float4x4)
 
-     func updateVirtualObject(_ object: SCNNode, to position: float3, filterPosition: Bool, cameraTransform: matrix_float4x4)
+     func updateVirtualObject(_ object: Object, to position: float3, filterPosition: Bool, cameraTransform: matrix_float4x4)
 
     func checkIfObjectShouldMoveOntoPlane(planeAnchor: ARPlaneAnchor, planeAnchorNode: SCNNode)
 
@@ -44,6 +44,77 @@ protocol ObjectManager {
 }
 
 extension ObjectManager {
+
+    // MARK: - Update Object Position
+
+    func translate(_ object: Object, in sceneView: ARSCNView, basedOn screenPosition: CGPoint, instantly: Bool, infinitePlane: Bool) {
+        DispatchQueue.main.async {
+            let result = self.worldPosition(from: screenPosition, in: sceneView, objectPosition: object.simdPosition, infinitePlane: infinitePlane)
+
+            guard let newPosition = result.position,
+                let cameraTransform = sceneView.session.currentFrame?.camera.transform else {
+                    return
+            }
+
+            DispatchQueue.global().async {
+                self.setPosition(for: object,
+                                 position: newPosition,
+                                 instantly: instantly,
+                                 filterPosition: !result.hitAPlane,
+                                 cameraTransform: cameraTransform)
+            }
+        }
+    }
+
+    func setPosition(for object: Object, position: float3, instantly: Bool, filterPosition: Bool, cameraTransform: matrix_float4x4) {
+        if instantly {
+            setVirtualObject(object, to: position, cameraTransform: cameraTransform)
+        } else {
+            updateVirtualObject(object, to: position, filterPosition: filterPosition, cameraTransform: cameraTransform)
+        }
+    }
+
+    func setVirtualObject(_ object: Object, to position: float3, cameraTransform: matrix_float4x4) {
+        let cameraWorldPosition = cameraTransform.translation
+        var cameraToPosition = position - cameraWorldPosition
+
+        // Limit the distance of the object from the camera to a maximum of 10 meters.
+        if simd_length(cameraToPosition) > 10 {
+            cameraToPosition = simd_normalize(cameraToPosition)
+            cameraToPosition *= 10
+        }
+
+        object.simdPosition = cameraWorldPosition + cameraToPosition
+        object.recentDistances.removeAll()
+    }
+
+    func updateVirtualObject(_ object: Object, to position: float3, filterPosition: Bool, cameraTransform: matrix_float4x4) {
+        let cameraWorldPosition = cameraTransform.translation
+        var cameraToPosition = position - cameraWorldPosition
+
+        // Limit the distance of the object from the camera to a maximum of 10 meters.
+        if simd_length(cameraToPosition) > 10 {
+            cameraToPosition = simd_normalize(cameraToPosition)
+            cameraToPosition *= 10
+        }
+
+        // Compute the average distance of the object from the camera over the last ten
+        // updates. If filterPosition is true, compute a new position for the object
+        // with this average. Notice that the distance is applied to the vector from
+        // the camera to the content, so it only affects the percieved distance of the
+        // object - the averaging does _not_ make the content "lag".
+        let hitTestResultDistance = simd_length(cameraToPosition)
+
+        object.recentDistances.append(hitTestResultDistance)
+        object.recentDistances.keepLast(10)
+
+        if filterPosition, let averageDistance = object.recentDistances.average {
+            let averagedDistancePosition = cameraWorldPosition + simd_normalize(cameraToPosition) * averageDistance
+            object.simdPosition = averagedDistancePosition
+        } else {
+            object.simdPosition = cameraWorldPosition + cameraToPosition
+        }
+    }
 
     func checkIfObjectShouldMoveOntoPlane(planeAnchor: ARPlaneAnchor, planeAnchorNode: SCNNode) {
         guard let object = lastUsedObject else {

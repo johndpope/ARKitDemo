@@ -39,7 +39,11 @@ class VirtualObject: Object {
     init(definition: VirtualObjectDefinition) {
         self.definition = definition
 
-        guard let modelURL = Bundle.main.url(forResource: "Models.scnassets/\(definition.modelName)/\(definition.modelName)", withExtension: "scn") else {
+//        guard let modelURL = Bundle.main.url(forResource: "Models.scnassets/\(definition.modelName)/\(definition.modelName)", withExtension: "scn") else {
+//            fatalError("can't find Models.scnassets/\(definition.modelName)/\(definition.modelName).scn file")
+//        }
+
+        guard let modelURL = Bundle.main.url(forResource: "Models.scnassets/Warehouse Rack Set/racks1", withExtension: "obj") else {
             fatalError("can't find Models.scnassets/\(definition.modelName)/\(definition.modelName).scn file")
         }
 

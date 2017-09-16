@@ -1,0 +1,114 @@
+newmtl PHONG_1SG
+illum 4
+Kd 0.82 0.19 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 79.83
+newmtl PHONG_2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd dexion2_transp.jpg
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 90.40
+newmtl PHONG_3SG
+illum 4
+Kd 0.73 0.73 0.73
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 68.15
+newmtl PHONG_4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd brushedfloor.jpg
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 48.69
+newmtl box2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cardbox2.jpg
+Ni 1.00
+Ks 0.46 0.46 0.46
+Ns 19.12
+newmtl box3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cardbox3.jpg
+Ni 1.00
+Ks 0.16 0.16 0.16
+Ns 8.76
+newmtl box4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cardbox4.jpg
+Ni 1.00
+Ks 0.17 0.17 0.17
+Ns 6.37
+newmtl box5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cardbox5.jpg
+Ni 1.00
+Ks 0.13 0.13 0.13
+Ns 3.98
+newmtl box6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cardbox6.jpg
+Ni 1.00
+Ks 0.15 0.15 0.15
+Ns 7.17
+newmtl phong13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 7.97
+newmtl phong17SG
+illum 4
+Kd 0.05 0.11 0.26
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd wood_12.jpg
+bump wood_12.jpg -bm 0.25
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 11.95
+newmtl phongE1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cardbox1.jpg
+Ni 1.00
+Ks 0.10 0.10 0.10
+Ns 2.39
